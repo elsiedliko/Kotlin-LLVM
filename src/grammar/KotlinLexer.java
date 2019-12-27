@@ -11,6 +11,14 @@ import org.antlr.v4.runtime.misc.Utils;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class KotlinLexer extends Lexer {
+    /**
+     * @deprecated Use {@link #VOCABULARY} instead.
+     */
+    @Deprecated
+    public static final String[] tokenNames;
+    public static final ATN _ATN =
+            new ATNDeserializer().deserialize(_serializedATN.toCharArray());
+    protected static final DFA[] _decisionToDFA;
     public static final int
             ShebangLine = 1, DelimitedComment = 2, LineComment = 3, WS = 4, NL = 5, RESERVED = 6,
             DOT = 7, COMMA = 8, LPAREN = 9, RPAREN = 10, LSQUARE = 11, RSQUARE = 12, LCURL = 13,
@@ -44,20 +52,217 @@ public class KotlinLexer extends Lexer {
             Inside_Comment = 167, Inside_WS = 168, Inside_NL = 169, ErrorCharacter = 170;
     public static final int
             LineString = 1, MultiLineString = 2, Inside = 3;
-    public static final String[] ruleNames = makeRuleNames();
-    /**
-     * @deprecated Use {@link #VOCABULARY} instead.
-     */
-    @Deprecated
-    public static final String[] tokenNames;
-    public static final ATN _ATN =
-            new ATNDeserializer().deserialize(_serializedATN.toCharArray());
-    protected static final DFA[] _decisionToDFA;
     protected static final PredictionContextCache _sharedContextCache =
             new PredictionContextCache();
+    public static String[] channelNames = {
+            "DEFAULT_TOKEN_CHANNEL", "HIDDEN"
+    };
+    public static String[] modeNames = {
+            "DEFAULT_MODE", "LineString", "MultiLineString", "Inside"
+    };
+
+    public static final String[] ruleNames = makeRuleNames();
+
+    static {
+        RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION);
+    }
+
     private static final String[] _LITERAL_NAMES = makeLiteralNames();
+
+    static {
+        tokenNames = new String[_SYMBOLIC_NAMES.length];
+        for (int i = 0; i < tokenNames.length; i++) {
+            tokenNames[i] = VOCABULARY.getLiteralName(i);
+            if (tokenNames[i] == null) {
+                tokenNames[i] = VOCABULARY.getSymbolicName(i);
+            }
+
+            if (tokenNames[i] == null) {
+                tokenNames[i] = "<INVALID>";
+            }
+        }
+    }
+
     private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
     public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
+
+    public KotlinLexer(CharStream input) {
+        super(input);
+        _interp = new LexerATNSimulator(this, _ATN, _decisionToDFA, _sharedContextCache);
+    }
+
+    private static String[] makeRuleNames() {
+        return new String[]{
+                "ShebangLine", "DelimitedComment", "LineComment", "WS", "NL", "Hidden",
+                "RESERVED", "DOT", "COMMA", "LPAREN", "RPAREN", "LSQUARE", "RSQUARE",
+                "LCURL", "RCURL", "MULT", "MOD", "DIV", "ADD", "SUB", "INCR", "DECR",
+                "CONJ", "DISJ", "EXCL_WS", "EXCL_NO_WS", "COLON", "SEMICOLON", "ASSIGNMENT",
+                "ADD_ASSIGNMENT", "SUB_ASSIGNMENT", "MULT_ASSIGNMENT", "DIV_ASSIGNMENT",
+                "MOD_ASSIGNMENT", "ARROW", "DOUBLE_ARROW", "RANGE", "COLONCOLON", "DOUBLE_SEMICOLON",
+                "HASH", "AT_NO_WS", "AT_POST_WS", "AT_PRE_WS", "AT_BOTH_WS", "QUEST_WS",
+                "QUEST_NO_WS", "LANGLE", "RANGLE", "LE", "GE", "EXCL_EQ", "EXCL_EQEQ",
+                "AS_SAFE", "EQEQ", "EQEQEQ", "SINGLE_QUOTE", "RETURN_AT", "CONTINUE_AT",
+                "BREAK_AT", "THIS_AT", "SUPER_AT", "FILE", "FIELD", "PROPERTY", "GET",
+                "SET", "RECEIVER", "PARAM", "SETPARAM", "DELEGATE", "PACKAGE", "IMPORT",
+                "CLASS", "INTERFACE", "FUN", "OBJECT", "VAL", "VAR", "TYPE_ALIAS", "CONSTRUCTOR",
+                "BY", "COMPANION", "INIT", "THIS", "SUPER", "TYPEOF", "WHERE", "IF",
+                "ELSE", "WHEN", "TRY", "CATCH", "FINALLY", "FOR", "DO", "WHILE", "THROW",
+                "RETURN", "CONTINUE", "BREAK", "AS", "IS", "IN", "NOT_IS", "NOT_IN",
+                "OUT", "DYNAMIC", "PUBLIC", "PRIVATE", "PROTECTED", "INTERNAL", "ENUM",
+                "SEALED", "ANNOTATION", "DATA", "INNER", "TAILREC", "OPERATOR", "INLINE",
+                "INFIX", "EXTERNAL", "SUSPEND", "OVERRIDE", "ABSTRACT", "FINAL", "OPEN",
+                "CONST", "LATEINIT", "VARARG", "NOINLINE", "CROSSINLINE", "REIFIED",
+                "EXPECT", "ACTUAL", "DecDigit", "DecDigitNoZero", "DecDigitOrSeparator",
+                "DecDigits", "DoubleExponent", "RealLiteral", "FloatLiteral", "DoubleLiteral",
+                "IntegerLiteral", "HexDigit", "HexDigitOrSeparator", "HexLiteral", "BinDigit",
+                "BinDigitOrSeparator", "BinLiteral", "UnsignedLiteral", "LongLiteral",
+                "BooleanLiteral", "NullLiteral", "CharacterLiteral", "UnicodeDigit",
+                "Identifier", "IdentifierOrSoftKey", "FieldIdentifier", "UniCharacterLiteral",
+                "EscapedIdentifier", "EscapeSeq", "Letter", "QUOTE_OPEN", "TRIPLE_QUOTE_OPEN",
+                "UNICODE_CLASS_LL", "UNICODE_CLASS_LM", "UNICODE_CLASS_LO", "UNICODE_CLASS_LT",
+                "UNICODE_CLASS_LU", "UNICODE_CLASS_ND", "UNICODE_CLASS_NL", "QUOTE_CLOSE",
+                "LineStrRef", "LineStrText", "LineStrEscapedChar", "LineStrExprStart",
+                "TRIPLE_QUOTE_CLOSE", "MultiLineStringQuote", "MultiLineStrRef", "MultiLineStrText",
+                "MultiLineStrExprStart", "Inside_RPAREN", "Inside_RSQUARE", "Inside_LPAREN",
+                "Inside_LSQUARE", "Inside_LCURL", "Inside_RCURL", "Inside_DOT", "Inside_COMMA",
+                "Inside_MULT", "Inside_MOD", "Inside_DIV", "Inside_ADD", "Inside_SUB",
+                "Inside_INCR", "Inside_DECR", "Inside_CONJ", "Inside_DISJ", "Inside_EXCL_WS",
+                "Inside_EXCL_NO_WS", "Inside_COLON", "Inside_SEMICOLON", "Inside_ASSIGNMENT",
+                "Inside_ADD_ASSIGNMENT", "Inside_SUB_ASSIGNMENT", "Inside_MULT_ASSIGNMENT",
+                "Inside_DIV_ASSIGNMENT", "Inside_MOD_ASSIGNMENT", "Inside_ARROW", "Inside_DOUBLE_ARROW",
+                "Inside_RANGE", "Inside_RESERVED", "Inside_COLONCOLON", "Inside_DOUBLE_SEMICOLON",
+                "Inside_HASH", "Inside_AT_NO_WS", "Inside_AT_POST_WS", "Inside_AT_PRE_WS",
+                "Inside_AT_BOTH_WS", "Inside_QUEST_WS", "Inside_QUEST_NO_WS", "Inside_LANGLE",
+                "Inside_RANGLE", "Inside_LE", "Inside_GE", "Inside_EXCL_EQ", "Inside_EXCL_EQEQ",
+                "Inside_IS", "Inside_NOT_IS", "Inside_NOT_IN", "Inside_AS", "Inside_AS_SAFE",
+                "Inside_EQEQ", "Inside_EQEQEQ", "Inside_SINGLE_QUOTE", "Inside_QUOTE_OPEN",
+                "Inside_TRIPLE_QUOTE_OPEN", "Inside_VAL", "Inside_VAR", "Inside_FUN",
+                "Inside_OBJECT", "Inside_SUPER", "Inside_IN", "Inside_OUT", "Inside_FIELD",
+                "Inside_FILE", "Inside_PROPERTY", "Inside_GET", "Inside_SET", "Inside_RECEIVER",
+                "Inside_PARAM", "Inside_SETPARAM", "Inside_DELEGATE", "Inside_THROW",
+                "Inside_RETURN", "Inside_CONTINUE", "Inside_BREAK", "Inside_RETURN_AT",
+                "Inside_CONTINUE_AT", "Inside_BREAK_AT", "Inside_IF", "Inside_ELSE",
+                "Inside_WHEN", "Inside_TRY", "Inside_CATCH", "Inside_FINALLY", "Inside_FOR",
+                "Inside_DO", "Inside_WHILE", "Inside_PUBLIC", "Inside_PRIVATE", "Inside_PROTECTED",
+                "Inside_INTERNAL", "Inside_ENUM", "Inside_SEALED", "Inside_ANNOTATION",
+                "Inside_DATA", "Inside_INNER", "Inside_TAILREC", "Inside_OPERATOR", "Inside_INLINE",
+                "Inside_INFIX", "Inside_EXTERNAL", "Inside_SUSPEND", "Inside_OVERRIDE",
+                "Inside_ABSTRACT", "Inside_FINAL", "Inside_OPEN", "Inside_CONST", "Inside_LATEINIT",
+                "Inside_VARARG", "Inside_NOINLINE", "Inside_CROSSINLINE", "Inside_REIFIED",
+                "Inside_EXPECT", "Inside_ACTUAL", "Inside_BooleanLiteral", "Inside_IntegerLiteral",
+                "Inside_HexLiteral", "Inside_BinLiteral", "Inside_CharacterLiteral",
+                "Inside_RealLiteral", "Inside_NullLiteral", "Inside_LongLiteral", "Inside_UnsignedLiteral",
+                "Inside_Identifier", "Inside_Comment", "Inside_WS", "Inside_NL", "ErrorCharacter"
+        };
+    }
+
+    private static String[] makeLiteralNames() {
+        return new String[]{
+                null, null, null, null, null, null, "'...'", "'.'", "','", "'('", "')'",
+                "'['", "']'", "'{'", "'}'", "'*'", "'%'", "'/'", "'+'", "'-'", "'++'",
+                "'--'", "'&&'", "'||'", null, "'!'", "':'", "';'", "'='", "'+='", "'-='",
+                "'*='", "'/='", "'%='", "'->'", "'=>'", "'..'", "'::'", "';;'", "'#'",
+                "'@'", null, null, null, null, "'?'", "'<'", "'>'", "'<='", "'>='", "'!='",
+                "'!=='", "'as?'", "'=='", "'==='", "'''", null, null, null, null, null,
+                "'file'", "'field'", "'property'", "'get'", "'set'", "'receiver'", "'param'",
+                "'setparam'", "'delegate'", "'package'", "'import'", "'class'", "'interface'",
+                "'fun'", "'object'", "'val'", "'var'", "'typealias'", "'constructor'",
+                "'by'", "'companion'", "'init'", "'this'", "'super'", "'typeof'", "'where'",
+                "'if'", "'else'", "'when'", "'try'", "'catch'", "'finally'", "'for'",
+                "'do'", "'while'", "'throw'", "'return'", "'continue'", "'break'", "'as'",
+                "'is'", "'in'", null, null, "'out'", "'dynamic'", "'public'", "'private'",
+                "'protected'", "'internal'", "'enum'", "'sealed'", "'annotation'", "'data'",
+                "'inner'", "'tailrec'", "'operator'", "'inline'", "'infix'", "'external'",
+                "'suspend'", "'override'", "'abstract'", "'final'", "'open'", "'const'",
+                "'lateinit'", "'vararg'", "'noinline'", "'crossinline'", "'reified'",
+                "'expect'", "'actual'", null, null, null, null, null, null, null, null,
+                null, "'null'", null, null, null, null, null, "'\"\"\"'"
+        };
+    }
+
+    private static String[] makeSymbolicNames() {
+        return new String[]{
+                null, "ShebangLine", "DelimitedComment", "LineComment", "WS", "NL", "RESERVED",
+                "DOT", "COMMA", "LPAREN", "RPAREN", "LSQUARE", "RSQUARE", "LCURL", "RCURL",
+                "MULT", "MOD", "DIV", "ADD", "SUB", "INCR", "DECR", "CONJ", "DISJ", "EXCL_WS",
+                "EXCL_NO_WS", "COLON", "SEMICOLON", "ASSIGNMENT", "ADD_ASSIGNMENT", "SUB_ASSIGNMENT",
+                "MULT_ASSIGNMENT", "DIV_ASSIGNMENT", "MOD_ASSIGNMENT", "ARROW", "DOUBLE_ARROW",
+                "RANGE", "COLONCOLON", "DOUBLE_SEMICOLON", "HASH", "AT_NO_WS", "AT_POST_WS",
+                "AT_PRE_WS", "AT_BOTH_WS", "QUEST_WS", "QUEST_NO_WS", "LANGLE", "RANGLE",
+                "LE", "GE", "EXCL_EQ", "EXCL_EQEQ", "AS_SAFE", "EQEQ", "EQEQEQ", "SINGLE_QUOTE",
+                "RETURN_AT", "CONTINUE_AT", "BREAK_AT", "THIS_AT", "SUPER_AT", "FILE",
+                "FIELD", "PROPERTY", "GET", "SET", "RECEIVER", "PARAM", "SETPARAM", "DELEGATE",
+                "PACKAGE", "IMPORT", "CLASS", "INTERFACE", "FUN", "OBJECT", "VAL", "VAR",
+                "TYPE_ALIAS", "CONSTRUCTOR", "BY", "COMPANION", "INIT", "THIS", "SUPER",
+                "TYPEOF", "WHERE", "IF", "ELSE", "WHEN", "TRY", "CATCH", "FINALLY", "FOR",
+                "DO", "WHILE", "THROW", "RETURN", "CONTINUE", "BREAK", "AS", "IS", "IN",
+                "NOT_IS", "NOT_IN", "OUT", "DYNAMIC", "PUBLIC", "PRIVATE", "PROTECTED",
+                "INTERNAL", "ENUM", "SEALED", "ANNOTATION", "DATA", "INNER", "TAILREC",
+                "OPERATOR", "INLINE", "INFIX", "EXTERNAL", "SUSPEND", "OVERRIDE", "ABSTRACT",
+                "FINAL", "OPEN", "CONST", "LATEINIT", "VARARG", "NOINLINE", "CROSSINLINE",
+                "REIFIED", "EXPECT", "ACTUAL", "RealLiteral", "FloatLiteral", "DoubleLiteral",
+                "IntegerLiteral", "HexLiteral", "BinLiteral", "UnsignedLiteral", "LongLiteral",
+                "BooleanLiteral", "NullLiteral", "CharacterLiteral", "Identifier", "IdentifierOrSoftKey",
+                "FieldIdentifier", "QUOTE_OPEN", "TRIPLE_QUOTE_OPEN", "UNICODE_CLASS_LL",
+                "UNICODE_CLASS_LM", "UNICODE_CLASS_LO", "UNICODE_CLASS_LT", "UNICODE_CLASS_LU",
+                "UNICODE_CLASS_ND", "UNICODE_CLASS_NL", "QUOTE_CLOSE", "LineStrRef",
+                "LineStrText", "LineStrEscapedChar", "LineStrExprStart", "TRIPLE_QUOTE_CLOSE",
+                "MultiLineStringQuote", "MultiLineStrRef", "MultiLineStrText", "MultiLineStrExprStart",
+                "Inside_Comment", "Inside_WS", "Inside_NL", "ErrorCharacter"
+        };
+    }
+
+    @Override
+    @Deprecated
+    public String[] getTokenNames() {
+        return tokenNames;
+    }
+
+    @Override
+
+    public Vocabulary getVocabulary() {
+        return VOCABULARY;
+    }
+
+    @Override
+    public String getGrammarFileName() {
+        return "KotlinLexer.g4";
+    }
+
+    @Override
+    public String[] getRuleNames() {
+        return ruleNames;
+    }
+
+    @Override
+    public String getSerializedATN() {
+        return _serializedATN;
+    }
+
+    @Override
+    public String[] getChannelNames() {
+        return channelNames;
+    }
+
+    @Override
+    public String[] getModeNames() {
+        return modeNames;
+    }
+
+    @Override
+    public ATN getATN() {
+        return _ATN;
+    }
+
+    @Override
+    public void action(RuleContext _localctx, int ruleIndex, int actionIndex) {
+        switch (ruleIndex) {
+            case 14:
+                RCURL_action((RuleContext) _localctx, actionIndex);
+                break;
+        }
+    }
+
     private static final int _serializedATNSegments = 2;
     private static final String _serializedATNSegment0 =
             "\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\u00ac\u08a8\b\1\b" +
@@ -1212,214 +1417,6 @@ public class KotlinLexer extends Lexer {
             },
             ""
     );
-    public static String[] channelNames = {
-            "DEFAULT_TOKEN_CHANNEL", "HIDDEN"
-    };
-    public static String[] modeNames = {
-            "DEFAULT_MODE", "LineString", "MultiLineString", "Inside"
-    };
-
-    static {
-        RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION);
-    }
-
-    static {
-        tokenNames = new String[_SYMBOLIC_NAMES.length];
-        for (int i = 0; i < tokenNames.length; i++) {
-            tokenNames[i] = VOCABULARY.getLiteralName(i);
-            if (tokenNames[i] == null) {
-                tokenNames[i] = VOCABULARY.getSymbolicName(i);
-            }
-
-            if (tokenNames[i] == null) {
-                tokenNames[i] = "<INVALID>";
-            }
-        }
-    }
-
-    static {
-        _decisionToDFA = new DFA[_ATN.getNumberOfDecisions()];
-        for (int i = 0; i < _ATN.getNumberOfDecisions(); i++) {
-            _decisionToDFA[i] = new DFA(_ATN.getDecisionState(i), i);
-        }
-    }
-
-    public KotlinLexer(CharStream input) {
-        super(input);
-        _interp = new LexerATNSimulator(this, _ATN, _decisionToDFA, _sharedContextCache);
-    }
-
-    private static String[] makeRuleNames() {
-        return new String[]{
-                "ShebangLine", "DelimitedComment", "LineComment", "WS", "NL", "Hidden",
-                "RESERVED", "DOT", "COMMA", "LPAREN", "RPAREN", "LSQUARE", "RSQUARE",
-                "LCURL", "RCURL", "MULT", "MOD", "DIV", "ADD", "SUB", "INCR", "DECR",
-                "CONJ", "DISJ", "EXCL_WS", "EXCL_NO_WS", "COLON", "SEMICOLON", "ASSIGNMENT",
-                "ADD_ASSIGNMENT", "SUB_ASSIGNMENT", "MULT_ASSIGNMENT", "DIV_ASSIGNMENT",
-                "MOD_ASSIGNMENT", "ARROW", "DOUBLE_ARROW", "RANGE", "COLONCOLON", "DOUBLE_SEMICOLON",
-                "HASH", "AT_NO_WS", "AT_POST_WS", "AT_PRE_WS", "AT_BOTH_WS", "QUEST_WS",
-                "QUEST_NO_WS", "LANGLE", "RANGLE", "LE", "GE", "EXCL_EQ", "EXCL_EQEQ",
-                "AS_SAFE", "EQEQ", "EQEQEQ", "SINGLE_QUOTE", "RETURN_AT", "CONTINUE_AT",
-                "BREAK_AT", "THIS_AT", "SUPER_AT", "FILE", "FIELD", "PROPERTY", "GET",
-                "SET", "RECEIVER", "PARAM", "SETPARAM", "DELEGATE", "PACKAGE", "IMPORT",
-                "CLASS", "INTERFACE", "FUN", "OBJECT", "VAL", "VAR", "TYPE_ALIAS", "CONSTRUCTOR",
-                "BY", "COMPANION", "INIT", "THIS", "SUPER", "TYPEOF", "WHERE", "IF",
-                "ELSE", "WHEN", "TRY", "CATCH", "FINALLY", "FOR", "DO", "WHILE", "THROW",
-                "RETURN", "CONTINUE", "BREAK", "AS", "IS", "IN", "NOT_IS", "NOT_IN",
-                "OUT", "DYNAMIC", "PUBLIC", "PRIVATE", "PROTECTED", "INTERNAL", "ENUM",
-                "SEALED", "ANNOTATION", "DATA", "INNER", "TAILREC", "OPERATOR", "INLINE",
-                "INFIX", "EXTERNAL", "SUSPEND", "OVERRIDE", "ABSTRACT", "FINAL", "OPEN",
-                "CONST", "LATEINIT", "VARARG", "NOINLINE", "CROSSINLINE", "REIFIED",
-                "EXPECT", "ACTUAL", "DecDigit", "DecDigitNoZero", "DecDigitOrSeparator",
-                "DecDigits", "DoubleExponent", "RealLiteral", "FloatLiteral", "DoubleLiteral",
-                "IntegerLiteral", "HexDigit", "HexDigitOrSeparator", "HexLiteral", "BinDigit",
-                "BinDigitOrSeparator", "BinLiteral", "UnsignedLiteral", "LongLiteral",
-                "BooleanLiteral", "NullLiteral", "CharacterLiteral", "UnicodeDigit",
-                "Identifier", "IdentifierOrSoftKey", "FieldIdentifier", "UniCharacterLiteral",
-                "EscapedIdentifier", "EscapeSeq", "Letter", "QUOTE_OPEN", "TRIPLE_QUOTE_OPEN",
-                "UNICODE_CLASS_LL", "UNICODE_CLASS_LM", "UNICODE_CLASS_LO", "UNICODE_CLASS_LT",
-                "UNICODE_CLASS_LU", "UNICODE_CLASS_ND", "UNICODE_CLASS_NL", "QUOTE_CLOSE",
-                "LineStrRef", "LineStrText", "LineStrEscapedChar", "LineStrExprStart",
-                "TRIPLE_QUOTE_CLOSE", "MultiLineStringQuote", "MultiLineStrRef", "MultiLineStrText",
-                "MultiLineStrExprStart", "Inside_RPAREN", "Inside_RSQUARE", "Inside_LPAREN",
-                "Inside_LSQUARE", "Inside_LCURL", "Inside_RCURL", "Inside_DOT", "Inside_COMMA",
-                "Inside_MULT", "Inside_MOD", "Inside_DIV", "Inside_ADD", "Inside_SUB",
-                "Inside_INCR", "Inside_DECR", "Inside_CONJ", "Inside_DISJ", "Inside_EXCL_WS",
-                "Inside_EXCL_NO_WS", "Inside_COLON", "Inside_SEMICOLON", "Inside_ASSIGNMENT",
-                "Inside_ADD_ASSIGNMENT", "Inside_SUB_ASSIGNMENT", "Inside_MULT_ASSIGNMENT",
-                "Inside_DIV_ASSIGNMENT", "Inside_MOD_ASSIGNMENT", "Inside_ARROW", "Inside_DOUBLE_ARROW",
-                "Inside_RANGE", "Inside_RESERVED", "Inside_COLONCOLON", "Inside_DOUBLE_SEMICOLON",
-                "Inside_HASH", "Inside_AT_NO_WS", "Inside_AT_POST_WS", "Inside_AT_PRE_WS",
-                "Inside_AT_BOTH_WS", "Inside_QUEST_WS", "Inside_QUEST_NO_WS", "Inside_LANGLE",
-                "Inside_RANGLE", "Inside_LE", "Inside_GE", "Inside_EXCL_EQ", "Inside_EXCL_EQEQ",
-                "Inside_IS", "Inside_NOT_IS", "Inside_NOT_IN", "Inside_AS", "Inside_AS_SAFE",
-                "Inside_EQEQ", "Inside_EQEQEQ", "Inside_SINGLE_QUOTE", "Inside_QUOTE_OPEN",
-                "Inside_TRIPLE_QUOTE_OPEN", "Inside_VAL", "Inside_VAR", "Inside_FUN",
-                "Inside_OBJECT", "Inside_SUPER", "Inside_IN", "Inside_OUT", "Inside_FIELD",
-                "Inside_FILE", "Inside_PROPERTY", "Inside_GET", "Inside_SET", "Inside_RECEIVER",
-                "Inside_PARAM", "Inside_SETPARAM", "Inside_DELEGATE", "Inside_THROW",
-                "Inside_RETURN", "Inside_CONTINUE", "Inside_BREAK", "Inside_RETURN_AT",
-                "Inside_CONTINUE_AT", "Inside_BREAK_AT", "Inside_IF", "Inside_ELSE",
-                "Inside_WHEN", "Inside_TRY", "Inside_CATCH", "Inside_FINALLY", "Inside_FOR",
-                "Inside_DO", "Inside_WHILE", "Inside_PUBLIC", "Inside_PRIVATE", "Inside_PROTECTED",
-                "Inside_INTERNAL", "Inside_ENUM", "Inside_SEALED", "Inside_ANNOTATION",
-                "Inside_DATA", "Inside_INNER", "Inside_TAILREC", "Inside_OPERATOR", "Inside_INLINE",
-                "Inside_INFIX", "Inside_EXTERNAL", "Inside_SUSPEND", "Inside_OVERRIDE",
-                "Inside_ABSTRACT", "Inside_FINAL", "Inside_OPEN", "Inside_CONST", "Inside_LATEINIT",
-                "Inside_VARARG", "Inside_NOINLINE", "Inside_CROSSINLINE", "Inside_REIFIED",
-                "Inside_EXPECT", "Inside_ACTUAL", "Inside_BooleanLiteral", "Inside_IntegerLiteral",
-                "Inside_HexLiteral", "Inside_BinLiteral", "Inside_CharacterLiteral",
-                "Inside_RealLiteral", "Inside_NullLiteral", "Inside_LongLiteral", "Inside_UnsignedLiteral",
-                "Inside_Identifier", "Inside_Comment", "Inside_WS", "Inside_NL", "ErrorCharacter"
-        };
-    }
-
-    private static String[] makeLiteralNames() {
-        return new String[]{
-                null, null, null, null, null, null, "'...'", "'.'", "','", "'('", "')'",
-                "'['", "']'", "'{'", "'}'", "'*'", "'%'", "'/'", "'+'", "'-'", "'++'",
-                "'--'", "'&&'", "'||'", null, "'!'", "':'", "';'", "'='", "'+='", "'-='",
-                "'*='", "'/='", "'%='", "'->'", "'=>'", "'..'", "'::'", "';;'", "'#'",
-                "'@'", null, null, null, null, "'?'", "'<'", "'>'", "'<='", "'>='", "'!='",
-                "'!=='", "'as?'", "'=='", "'==='", "'''", null, null, null, null, null,
-                "'file'", "'field'", "'property'", "'get'", "'set'", "'receiver'", "'param'",
-                "'setparam'", "'delegate'", "'package'", "'import'", "'class'", "'interface'",
-                "'fun'", "'object'", "'val'", "'var'", "'typealias'", "'constructor'",
-                "'by'", "'companion'", "'init'", "'this'", "'super'", "'typeof'", "'where'",
-                "'if'", "'else'", "'when'", "'try'", "'catch'", "'finally'", "'for'",
-                "'do'", "'while'", "'throw'", "'return'", "'continue'", "'break'", "'as'",
-                "'is'", "'in'", null, null, "'out'", "'dynamic'", "'public'", "'private'",
-                "'protected'", "'internal'", "'enum'", "'sealed'", "'annotation'", "'data'",
-                "'inner'", "'tailrec'", "'operator'", "'inline'", "'infix'", "'external'",
-                "'suspend'", "'override'", "'abstract'", "'final'", "'open'", "'const'",
-                "'lateinit'", "'vararg'", "'noinline'", "'crossinline'", "'reified'",
-                "'expect'", "'actual'", null, null, null, null, null, null, null, null,
-                null, "'null'", null, null, null, null, null, "'\"\"\"'"
-        };
-    }
-
-    private static String[] makeSymbolicNames() {
-        return new String[]{
-                null, "ShebangLine", "DelimitedComment", "LineComment", "WS", "NL", "RESERVED",
-                "DOT", "COMMA", "LPAREN", "RPAREN", "LSQUARE", "RSQUARE", "LCURL", "RCURL",
-                "MULT", "MOD", "DIV", "ADD", "SUB", "INCR", "DECR", "CONJ", "DISJ", "EXCL_WS",
-                "EXCL_NO_WS", "COLON", "SEMICOLON", "ASSIGNMENT", "ADD_ASSIGNMENT", "SUB_ASSIGNMENT",
-                "MULT_ASSIGNMENT", "DIV_ASSIGNMENT", "MOD_ASSIGNMENT", "ARROW", "DOUBLE_ARROW",
-                "RANGE", "COLONCOLON", "DOUBLE_SEMICOLON", "HASH", "AT_NO_WS", "AT_POST_WS",
-                "AT_PRE_WS", "AT_BOTH_WS", "QUEST_WS", "QUEST_NO_WS", "LANGLE", "RANGLE",
-                "LE", "GE", "EXCL_EQ", "EXCL_EQEQ", "AS_SAFE", "EQEQ", "EQEQEQ", "SINGLE_QUOTE",
-                "RETURN_AT", "CONTINUE_AT", "BREAK_AT", "THIS_AT", "SUPER_AT", "FILE",
-                "FIELD", "PROPERTY", "GET", "SET", "RECEIVER", "PARAM", "SETPARAM", "DELEGATE",
-                "PACKAGE", "IMPORT", "CLASS", "INTERFACE", "FUN", "OBJECT", "VAL", "VAR",
-                "TYPE_ALIAS", "CONSTRUCTOR", "BY", "COMPANION", "INIT", "THIS", "SUPER",
-                "TYPEOF", "WHERE", "IF", "ELSE", "WHEN", "TRY", "CATCH", "FINALLY", "FOR",
-                "DO", "WHILE", "THROW", "RETURN", "CONTINUE", "BREAK", "AS", "IS", "IN",
-                "NOT_IS", "NOT_IN", "OUT", "DYNAMIC", "PUBLIC", "PRIVATE", "PROTECTED",
-                "INTERNAL", "ENUM", "SEALED", "ANNOTATION", "DATA", "INNER", "TAILREC",
-                "OPERATOR", "INLINE", "INFIX", "EXTERNAL", "SUSPEND", "OVERRIDE", "ABSTRACT",
-                "FINAL", "OPEN", "CONST", "LATEINIT", "VARARG", "NOINLINE", "CROSSINLINE",
-                "REIFIED", "EXPECT", "ACTUAL", "RealLiteral", "FloatLiteral", "DoubleLiteral",
-                "IntegerLiteral", "HexLiteral", "BinLiteral", "UnsignedLiteral", "LongLiteral",
-                "BooleanLiteral", "NullLiteral", "CharacterLiteral", "Identifier", "IdentifierOrSoftKey",
-                "FieldIdentifier", "QUOTE_OPEN", "TRIPLE_QUOTE_OPEN", "UNICODE_CLASS_LL",
-                "UNICODE_CLASS_LM", "UNICODE_CLASS_LO", "UNICODE_CLASS_LT", "UNICODE_CLASS_LU",
-                "UNICODE_CLASS_ND", "UNICODE_CLASS_NL", "QUOTE_CLOSE", "LineStrRef",
-                "LineStrText", "LineStrEscapedChar", "LineStrExprStart", "TRIPLE_QUOTE_CLOSE",
-                "MultiLineStringQuote", "MultiLineStrRef", "MultiLineStrText", "MultiLineStrExprStart",
-                "Inside_Comment", "Inside_WS", "Inside_NL", "ErrorCharacter"
-        };
-    }
-
-    @Override
-    @Deprecated
-    public String[] getTokenNames() {
-        return tokenNames;
-    }
-
-    @Override
-
-    public Vocabulary getVocabulary() {
-        return VOCABULARY;
-    }
-
-    @Override
-    public String getGrammarFileName() {
-        return "KotlinLexer.g4";
-    }
-
-    @Override
-    public String[] getRuleNames() {
-        return ruleNames;
-    }
-
-    @Override
-    public String getSerializedATN() {
-        return _serializedATN;
-    }
-
-    @Override
-    public String[] getChannelNames() {
-        return channelNames;
-    }
-
-    @Override
-    public String[] getModeNames() {
-        return modeNames;
-    }
-
-    @Override
-    public ATN getATN() {
-        return _ATN;
-    }
-
-    @Override
-    public void action(RuleContext _localctx, int ruleIndex, int actionIndex) {
-        switch (ruleIndex) {
-            case 14:
-                RCURL_action((RuleContext) _localctx, actionIndex);
-                break;
-        }
-    }
 
     private void RCURL_action(RuleContext _localctx, int actionIndex) {
         switch (actionIndex) {
@@ -1428,6 +1425,13 @@ public class KotlinLexer extends Lexer {
                     popMode();
                 }
                 break;
+        }
+    }
+
+    static {
+        _decisionToDFA = new DFA[_ATN.getNumberOfDecisions()];
+        for (int i = 0; i < _ATN.getNumberOfDecisions(); i++) {
+            _decisionToDFA[i] = new DFA(_ATN.getDecisionState(i), i);
         }
     }
 }
