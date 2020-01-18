@@ -34,7 +34,17 @@ public class LLVMActions extends KotlinParserBaseListener {
 
     @Override
     public void exitCallSuffix(KotlinParser.CallSuffixContext ctx) {
-        LLVMGenerator.call(ctx.getText());
+        String text = ctx.getText();
+        String trimmed = null;
+        try {
+            trimmed = text.substring(1, text.length() - 1);
+        } catch (Exception ignored) {
+        }
+        if (trimmed != null && !trimmed.isEmpty() && variables.containsKey(trimmed)) {
+            printVariable(trimmed);
+        } else {
+            LLVMGenerator.call(text);
+        }
     }
 
     @Override
@@ -48,8 +58,7 @@ public class LLVMActions extends KotlinParserBaseListener {
     public void enterPropertyDeclaration(KotlinParser.PropertyDeclarationContext ctx) {
         if (ctx.VAL() != null) {
             String value = ctx.expression().getText();
-            boolean isMath = value.contains("+") || value.contains("-") || value.contains("*") || value.contains("/");
-            System.out.println("VALUE: " + value + " isMATH: " + isMath);
+            boolean isMath = isMathOperation(value);
             String type = ctx.variableDeclaration().type().getText();
             String name = ctx.variableDeclaration().simpleIdentifier().getText();
             Value value1 = new Value(VarType.valueOf(type.toUpperCase()), value);
@@ -72,6 +81,7 @@ public class LLVMActions extends KotlinParserBaseListener {
     public void exitKotlinFile(KotlinParser.KotlinFileContext ctx) {
         System.out.println(LLVMGenerator.generate());
     }
+
 
     private void declareVariable(String ID, Value value) {
         if (!variables.containsKey(ID)) {
@@ -143,15 +153,19 @@ public class LLVMActions extends KotlinParserBaseListener {
         System.exit(1);
     }
 
-//    private void printVariable(String ID) {
-//        if (variables.get(ID).type == VarType.INT) {
-//            LLVMGenerator.printf_i32(ID, globalNames);
-//        } else if (variables.get(ID).type == VarType.REAL) {
-//            LLVMGenerator.printf_double(ID, globalNames);
-//        } else if (variables.get(ID).type == VarType.STRING) {
-//            LLVMGenerator.printf_string(ID, variables.get(ID).content.length(), globalNames, function);
-//        }
-//    }
+    private void printVariable(String ID) {
+        if (variables.get(ID).type == VarType.INT) {
+            LLVMGenerator.printf_i32(ID, globalNames);
+        } else if (variables.get(ID).type == VarType.DOUBLE) {
+            LLVMGenerator.printf_double(ID, globalNames);
+        } else if (variables.get(ID).type == VarType.STRING) {
+            LLVMGenerator.printf_string(ID, variables.get(ID).content.length(), globalNames, function);
+        }
+    }
+
+    private boolean isMathOperation(String text) {
+        return text.contains("+") || text.contains("-") || text.contains("*") || text.contains("/") || text.contains("%");
+    }
 
     enum VarType {STRING, INT, DOUBLE}
 

@@ -50,8 +50,7 @@ public class KotlinLexer extends Lexer {
 	 */
 	@Deprecated
 	public static final String[] tokenNames;
-	public static final ATN _ATN =
-			new ATNDeserializer().deserialize(_serializedATN.toCharArray());
+	public static final ATN _ATN;
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
 			new PredictionContextCache();
@@ -1220,6 +1219,7 @@ public class KotlinLexer extends Lexer {
 	};
 
 	static {
+		_ATN = new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 		RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION);
 	}
 
