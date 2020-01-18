@@ -1,6 +1,5 @@
-// Generated from /home/marcin/IdeaProjects/KotlinToLLVMParser/src/main/resources/grammar/KotlinParser.g4 by ANTLR 4.7.2
+// Generated from /home/marcin/IdeaProjects/KotlinAntlrLLVMParser/resources/grammar/KotlinParser.g4 by ANTLR 4.7.2
 package grammar;
-
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**

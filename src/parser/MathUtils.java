@@ -42,11 +42,10 @@ class MathUtils {
 
         if (allValuesAreIntegers(rpn, variables)) {
             LLVMGenerator.fptosi(stack.pop());
-            return new LLVMActions.Value("%" + (LLVMGenerator.reg - 1), LLVMActions.VarType.INT);
+            return new LLVMActions.Value(LLVMActions.VarType.INT, "%" + (LLVMGenerator.reg - 1));
         } else {
-            return new LLVMActions.Value("%" + (LLVMGenerator.reg - 1), LLVMActions.VarType.REAL);
+            return new LLVMActions.Value(LLVMActions.VarType.DOUBLE, "%" + (LLVMGenerator.reg - 1));
         }
-
     }
 
     private static boolean allValuesAreIntegers(Queue<String> values, HashMap<String, LLVMActions.Value> variables) {
@@ -150,5 +149,4 @@ class MathUtils {
         }
         return true;
     }
-
 }
